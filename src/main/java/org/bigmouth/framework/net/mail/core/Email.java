@@ -56,7 +56,7 @@ public class Email implements Serializable, Cloneable {
 
     /** Email类型 0: 简单邮件 1:带附件邮件(默认) 2: HTML格式邮件 */
     private int emailType = MULTI_PART_EMAIL;
-
+    
     /** 默认构造函数 */
     public Email() {
 
@@ -234,5 +234,4 @@ public class Email implements Serializable, Cloneable {
     public void setEmailType(int emailType) {
         this.emailType = emailType;
     }
-
 }

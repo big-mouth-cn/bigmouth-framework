@@ -35,6 +35,8 @@ public class SMTPConfig {
 
     /** SMTP服务器验证密码 */
     private String password;
+    
+    private boolean ssl = false;
 
     /** 默认构造函数 */
     public SMTPConfig() {
@@ -61,10 +63,15 @@ public class SMTPConfig {
      * @param password SMTP服务器验证密码
      */
     public SMTPConfig(String hostName, int smtpPort, String username, String password) {
+        this(hostName, smtpPort, username, password, false);
+    }
+
+    public SMTPConfig(String hostName, int smtpPort, String username, String password, boolean ssl) {
         this.hostName = hostName;
         this.smtpPort = smtpPort;
         this.username = username;
         this.password = password;
+        this.ssl = ssl;
     }
 
     /**
@@ -113,5 +120,13 @@ public class SMTPConfig {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isSsl() {
+        return ssl;
+    }
+
+    public void setSsl(boolean ssl) {
+        this.ssl = ssl;
     }
 }

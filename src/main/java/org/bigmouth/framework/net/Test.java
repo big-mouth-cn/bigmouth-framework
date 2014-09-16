@@ -24,16 +24,14 @@ import org.bigmouth.framework.net.mail.core.SMTPConfig;
 public class Test {
 
     public static void main(String[] args) {
-        SMTPConfig config = new SMTPConfig("pop.sky-mobi.com", 465, "allen.hu@sky-mobi.com", "lvlu1314.");
+        SMTPConfig config = new SMTPConfig("smtp.exmail.qq.com", 465, "master@big-mouth.cn", "lvlu1314.", true);
         Email message = new Email();
-        message.setEmailType(Email.MULTI_PART_EMAIL);
+        message.setEmailType(Email.HTML_EMAIL);
         message.setSubject("Welcome to HangZhou.");
-        message.setFrom("allen.hu@sky-mobi.com", "安伦·胡");
+        message.setFrom("master@big-mouth.cn", "安伦·胡");
         message.addTo("huxiao.mail@qq.com");
-        message.addAttachment("http://www.baidu.com/img/baidu_jgylogo3.gif");
-        message.addAttachment("D:\\Workspace\\CDS-Framework\\libs\\commons\\commons-email-current.jar");
         message.setContent("Hello, Allen Welcome to HangZhou.");
-        EmailSender sender = EmailSenderFactory.getSender(Email.MULTI_PART_EMAIL, config);
+        EmailSender sender = EmailSenderFactory.getSender(Email.HTML_EMAIL, config);
         sender.send(message);
     }
 }

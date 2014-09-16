@@ -35,6 +35,7 @@ public class HtmlSender extends AbstractEmailSender {
     public HtmlSender(SMTPConfig config) {
         super(config);
         htmlEmail = new HtmlEmail();
+        htmlEmail.setSSL(config.isSsl());
         initHtmlEmail(config);
     }
 
@@ -51,7 +52,6 @@ public class HtmlSender extends AbstractEmailSender {
             htmlEmail.setSubject(email.getSubject());
             htmlEmail.setCharset(email.getCharset());
             htmlEmail.setHtmlMsg(email.getContent());
-
             // 完成发送
             htmlEmail.send();
         }
