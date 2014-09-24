@@ -2,6 +2,8 @@ package org.bigmouth.framework.web_socket.ws;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,10 +23,36 @@ public class NativeWebSocket extends WebSocketServer implements BigmouthWebSocke
     
     public NativeWebSocket(String host, int port) {
         super(new InetSocketAddress(host, port));
+        boolean already = isAlready(host, port);
+        if (already) {
+            throw new RuntimeException("Address already in use:" + host + ":" + port);
+        }
     }
     
     public NativeWebSocket(InetSocketAddress address) {
         super(address);
+    }
+    
+    private boolean isAlready(String host, int port) {
+        Socket socket = null;
+        try {
+            socket = new Socket(host, port);
+            return true;
+        }
+        catch (UnknownHostException e) {
+        }
+        catch (IOException e) {
+        }
+        finally {
+            if (null != socket) {
+                try {
+                    socket.close();
+                }
+                catch (IOException e) {
+                }
+            }
+        }
+        return false;
     }
 
     @Override
